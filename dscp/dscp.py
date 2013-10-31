@@ -18,6 +18,11 @@ def main():
     except IOError:
         groupdirs = ['/etc/dsh/group']
 
+    try:
+        machinelist = ['/etc/dsh/machines.list', os.path.exapnduser('~') + "/.dsh/machines.list"]
+    except IOError:
+        machineslist = ['/etc/dsh/machines.list']
+
     parser = argparse.ArgumentParser(description=__doc__, usage="%(prog)s [options] file destination")
 
     # General options
@@ -47,16 +52,29 @@ def main():
     if args.verbose:
         logger.setLevel(logging.DEBUG)
 
-    # groupdir = "./dsh"
-
-    if os.path.exists(groupdirs[0] + "/" + args.group):
-        filename = groupdirs[0] + "/" + args.group
-    elif len(groupdirs) == 2 and os.path.exists(groupdirs[1] + "/" + args.group):
-        filename = groupdirs[1] + "/" + args.group
-    else:
-        errormsg = "Unable to find %s in %s" % (args.group, " or ".join(groupdirs))
+    if not args.all and not args.group:
+        errormsg = "One of -g or -a is required!"
         logger.error(errormsg)
         sys.exit(1)
+
+    if args.all:
+        if os.path.exists(machineslist[0]):
+            filename = machineslist[0]
+        elif len(machineslist) == 2 and os.path.exists(machineslist[1]):
+            filename = machineslist[1]
+        else:
+            errormsg = "Unable to find %s" % " or ".join(machineslist)
+            logger.error(errormsg)
+            sys.exit(1)
+    elif args.group:
+        if os.path.exists(groupdirs[0] + "/" + args.group):
+            filename = groupdirs[0] + "/" + args.group
+        elif len(groupdirs) == 2 and os.path.exists(groupdirs[1] + "/" + args.group):
+            filename = groupdirs[1] + "/" + args.group
+        else:
+            errormsg = "Unable to find %s in %s" % (args.group, " or ".join(groupdirs))
+            logger.error(errormsg)
+            sys.exit(1)
 
     if args.verbose:
         logger.debug("Opening file " + filename)
