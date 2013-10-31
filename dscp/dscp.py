@@ -19,9 +19,9 @@ def main():
         groupdirs = ['/etc/dsh/group']
 
     try:
-        machinelist = ['/etc/dsh/machines.list', os.path.exapnduser('~') + "/.dsh/machines.list"]
+        machinelist = ['/etc/dsh/machines.list', os.path.expanduser('~') + "/.dsh/machines.list"]
     except IOError:
-        machineslist = ['/etc/dsh/machines.list']
+        machinelist = ['/etc/dsh/machines.list']
 
     parser = argparse.ArgumentParser(description=__doc__, usage="%(prog)s [options] file destination")
 
@@ -58,12 +58,12 @@ def main():
         sys.exit(1)
 
     if args.all:
-        if os.path.exists(machineslist[0]):
-            filename = machineslist[0]
-        elif len(machineslist) == 2 and os.path.exists(machineslist[1]):
-            filename = machineslist[1]
+        if os.path.exists(machinelist[0]):
+            filename = machinelist[0]
+        elif len(machinelist) == 2 and os.path.exists(machinelist[1]):
+            filename = machinelist[1]
         else:
-            errormsg = "Unable to find %s" % " or ".join(machineslist)
+            errormsg = "Unable to find %s" % " or ".join(machinelist)
             logger.error(errormsg)
             sys.exit(1)
     elif args.group:
@@ -90,11 +90,8 @@ def main():
     # Wrap the execution in try/except to catch a ctrl-c
     try:
         for node in nodes:
-            if args.show_machine_names:
-                remote = node.rstrip()
-            else:
-                remote = ""
-
+            remote = node.rstrip()
+            
             for f in args.file:
                 # prepare the scp commandline
                 commands = ['scp']
@@ -111,8 +108,9 @@ def main():
                 commands.append(node.rstrip() + ":" + args.destination)
                 logger.debug(" ".join(commands))
 
-                print("Copying %s -> %s:%s" % (f, remote, args.destination))
-                sys.stdout.flush()
+                if args.show_machine_names:
+                    print("Copying %s -> %s:%s" % (f, remote, args.destination))
+                    sys.stdout.flush()
 
                 try:
                     if args.concurrent:
