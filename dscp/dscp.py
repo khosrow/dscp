@@ -91,6 +91,10 @@ def main():
     try:
         for node in nodes:
             remote = node.rstrip()
+            r, sep, comment = node.partition('#')
+            remote = r.strip()
+            if remote == '' or remote is None:
+                continue
             
             for f in args.file:
                 # prepare the scp commandline
