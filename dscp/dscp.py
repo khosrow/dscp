@@ -11,7 +11,6 @@ import subprocess
 import logging
 import os
 
-
 def main():
     try:
         groupdirs = ['/etc/dsh/group', os.path.expanduser('~') + "/.dsh/group"]
@@ -52,7 +51,15 @@ def main():
     if args.verbose:
         logger.setLevel(logging.DEBUG)
 
-    if not args.all and not args.group:
+
+    # Extract group if entered as GROUP:/destination
+    group, destination = args.destination.split(':')
+
+    if args.group:
+        group = args.group
+
+    # if not args.all and not args.group:
+    if not args.all and not group:
         errormsg = "One of -g or -a is required!"
         logger.error(errormsg)
         sys.exit(1)
@@ -66,13 +73,13 @@ def main():
             errormsg = "Unable to find %s" % " or ".join(machinelist)
             logger.error(errormsg)
             sys.exit(1)
-    elif args.group:
-        if os.path.exists(groupdirs[0] + "/" + args.group):
-            filename = groupdirs[0] + "/" + args.group
-        elif len(groupdirs) == 2 and os.path.exists(groupdirs[1] + "/" + args.group):
-            filename = groupdirs[1] + "/" + args.group
+    elif group:
+        if os.path.exists(groupdirs[0] + "/" + group):
+            filename = groupdirs[0] + "/" + group
+        elif len(groupdirs) == 2 and os.path.exists(groupdirs[1] + "/" + group):
+            filename = groupdirs[1] + "/" + group
         else:
-            errormsg = "Unable to find %s in %s" % (args.group, " or ".join(groupdirs))
+            errormsg = "Unable to find %s in %s" % (group, " or ".join(groupdirs))
             logger.error(errormsg)
             sys.exit(1)
 
@@ -109,11 +116,11 @@ def main():
                 if args.recursive:
                     commands.append('-r')
                 commands.append(f)
-                commands.append(node.rstrip() + ":" + args.destination)
+                commands.append(node.rstrip() + ":" + destination)
                 logger.debug(" ".join(commands))
 
                 if args.show_machine_names:
-                    print("Copying %s -> %s:%s" % (f, remote, args.destination))
+                    print("Copying %s -> %s:%s" % (f, remote, destination))
                     sys.stdout.flush()
 
                 try:
