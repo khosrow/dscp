@@ -12,5 +12,7 @@ else
 fi
 
 mkdir -p ~/.dsh/group
-ls ~
-ls -l ~/.dsh/group
+LS=`ls ~`
+echo $LS
+LS2=ls -l ~/.dsh/group
+echo $LS2
