@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DIR=`dirname $0`
+
 echo -n "Running test on 'dscp -a' ... "
 
 # Create test file
@@ -9,7 +11,7 @@ echo "test" > /tmp/source.txt
 echo "localhost
 localhost
 localhost" > ~/.dsh/machines.list
-python ../dscp/dscp.py /tmp/source.txt local:/tmp/dest.txt
+python $DIR/../dscp/dscp.py /tmp/source.txt local:/tmp/dest.txt
 diff /tmp/source.txt /tmp/dest.txt
 RET=$?
 

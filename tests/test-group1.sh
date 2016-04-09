@@ -1,4 +1,5 @@
 #!/bin/bash
+DIR=`dirname $0`
 
 echo -n "Running test on 'dscp -g' using $HOME/.dsh/group ... "
 
@@ -9,7 +10,8 @@ echo "test" > /tmp/source.txt
 echo "localhost
 localhost
 localhost" > ~/.dsh/group/local
-python ../dscp/dscp.py -g local /tmp/source.txt /tmp/dest.txt
+echo $0
+python $DIR/../dscp/dscp.py -g local /tmp/source.txt /tmp/dest.txt
 diff /tmp/source.txt /tmp/dest.txt
 RET=$?
 
