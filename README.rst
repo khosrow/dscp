@@ -2,6 +2,9 @@
 dscp 
 ==========
 
+.. image:: https://secure.travis-ci.org/khosrow/dscp.png
+   :target: https://travis-ci.org/#!/khosrow/dscp
+
 ------------------------
 Distributed secure copy
 ------------------------
