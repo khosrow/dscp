@@ -6,6 +6,8 @@ PASS=0
 DIR=`dirname $0`
 $DIR/setup.sh || exit 1
 
+mkdir -p ~/.dsh/group
+
 LS=`ls ~`
 echo "$LS"
 LS=`ls ~/.dsh/`

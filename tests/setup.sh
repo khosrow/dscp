@@ -10,9 +10,3 @@ else
 	echo "Unable to setup SSH keys to perform tests!"
 	exit 1
 fi
-
-mkdir -p ~/.dsh/group
-LS=`ls ~`
-echo $LS
-LS2=ls -l ~/.dsh/group
-echo $LS2
