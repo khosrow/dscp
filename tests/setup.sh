@@ -10,4 +10,5 @@ else
 	exit 1
 fi
 
+set -x
 mkdir -p ~/.dsh/group
