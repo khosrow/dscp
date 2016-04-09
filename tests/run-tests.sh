@@ -3,12 +3,13 @@
 FAIL=0
 PASS=0
 
-./setup.sh || exit 1
+DIR=`dirname $0`
+$DIR/setup.sh || exit 1
 
 echo "Running test suite"
 echo "------------------"
 
-for TEST in `ls test-*.sh`
+for TEST in `ls $DIR/test-*.sh`
 do
 	./$TEST
 	if [ $? -ne 0 ]; then
@@ -17,7 +18,6 @@ do
 	else
 		((PASS++))
 	fi
-
 done
 
 echo "-----------------"
