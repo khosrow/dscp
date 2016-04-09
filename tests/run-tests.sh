@@ -6,6 +6,11 @@ PASS=0
 DIR=`dirname $0`
 $DIR/setup.sh || exit 1
 
+LS=`ls ~`
+echo "$LS"
+LS=`ls ~/.dsh/`
+echo "$LS"
+
 echo "Running test suite"
 echo "------------------"
 
