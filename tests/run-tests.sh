@@ -8,9 +8,7 @@ $DIR/setup.sh || exit 1
 
 mkdir -p ~/.dsh/group
 
-LS=`ls ~`
-echo "$LS"
-LS=`ls ~/.dsh/`
+LS=`ls -l ~/.dsh/`
 echo "$LS"
 
 echo "Running test suite"

@@ -7,10 +7,11 @@ echo -n "Running test on 'dscp -g' using $HOME/.dsh/group ... "
 echo "test" > /tmp/source.txt
 
 # Create group file
+set -e
 echo "localhost
 localhost
 localhost" > ~/.dsh/group/local
-echo $0
+set +e
 python $DIR/../dscp/dscp.py -g local /tmp/source.txt /tmp/dest.txt
 diff /tmp/source.txt /tmp/dest.txt
 RET=$?
