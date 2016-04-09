@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -e
 ssh-keygen -q -t rsa -f ~/.ssh/id_rsa -N ''
 if [ -f ~/.ssh/id_rsa.pub ]; then
 	cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
@@ -10,5 +11,4 @@ else
 	exit 1
 fi
 
-set -x
 mkdir -p ~/.dsh/group
