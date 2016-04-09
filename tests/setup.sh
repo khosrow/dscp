@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ssh-keygen -q -t rsa -f ~/.ssh/id_rsa
+ssh-keygen -q -t rsa -f ~/.ssh/id_rsa -N ''
 if [ -f ~/.ssh/id_rsa.pub ]; then
 	cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 	ssh-keyscan localhost >> ~/.ssh/known_hosts
