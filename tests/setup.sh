@@ -12,3 +12,5 @@ else
 fi
 
 mkdir -p ~/.dsh/group
+ls ~
+ls -l ~/.dsh/group
