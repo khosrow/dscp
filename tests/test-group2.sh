@@ -1,8 +1,6 @@
 #!/bin/bash
 
 echo -n "Running test on 'dscp GROUP:/file' ... "
-echo "PASSED"
-exit 0
 
 # Create test file
 echo "test" > /tmp/source.txt

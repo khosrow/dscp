@@ -1,9 +1,6 @@
 #!/bin/bash
 
 echo -n "Running test on 'dscp -g' using $HOME/.dsh/group ... "
-echo "PASSED"
-exit 0
-
 
 # Create test file
 echo "test" > /tmp/source.txt
