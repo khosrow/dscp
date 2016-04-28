@@ -9,9 +9,11 @@ echo "test" > /tmp/source.txt
 # Create group file
 set -e
 touch ~/.dsh/group/local
+
 echo "DEBUG:"
 LS=`ls -l ~/.dsh/group`
 echo "$LS"
+
 echo "localhost
 localhost
 localhost" > ~/.dsh/group/local

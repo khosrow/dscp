@@ -8,10 +8,10 @@ echo -n "Running test on 'dscp -a' ... "
 echo "test" > /tmp/source.txt
 
 # Create group file
-echo "localhost
-localhost
+echo "localhost \
+localhost \
 localhost" > ~/.dsh/machines.list
-python $DIR/../dscp/dscp.py /tmp/source.txt local:/tmp/dest.txt
+python $DIR/../dscp/dscp.py -a /tmp/source.txt /tmp/dest.txt
 diff /tmp/source.txt /tmp/dest.txt
 RET=$?
 
