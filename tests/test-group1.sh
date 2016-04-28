@@ -1,6 +1,10 @@
 #!/bin/bash
 DIR=`dirname $0`
 
+echo "DEBUG:"
+LS=`ls -l ~/.dsh/group`
+echo "$LS"
+
 echo -n "Running test on 'dscp -g' using $HOME/.dsh/group ... "
 
 # Create test file
@@ -11,7 +15,7 @@ set -e
 echo "localhost
 localhost
 localhost" > ~/.dsh/group/local
-set +e
+set +echo
 python $DIR/../dscp/dscp.py -g local /tmp/source.txt /tmp/dest.txt
 diff /tmp/source.txt /tmp/dest.txt
 RET=$?
