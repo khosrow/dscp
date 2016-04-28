@@ -12,10 +12,11 @@ echo "test" > /tmp/source.txt
 
 # Create group file
 set -e
+touch ~/.dsh/group/local
 echo "localhost
 localhost
 localhost" > ~/.dsh/group/local
-set +echo
+set +e
 python $DIR/../dscp/dscp.py -g local /tmp/source.txt /tmp/dest.txt
 diff /tmp/source.txt /tmp/dest.txt
 RET=$?
